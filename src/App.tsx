@@ -141,23 +141,23 @@ function App() {
   const handleTogglePassedCourse = (courseId: string) => {
     if (!progress || !curriculum) return;
 
-    const updatedProgress = { ...progress };
-    const existingIndex = updatedProgress.passedCourses.findIndex(
+    const existingIndex = progress.passedCourses.findIndex(
       (pc) => pc.courseId === courseId
     );
 
-    if (existingIndex !== -1) {
-      // Remove from passed
-      updatedProgress.passedCourses.splice(existingIndex, 1);
-    } else {
-      // Add to passed
-      updatedProgress.passedCourses.push({
-        courseId,
-        passedDate: new Date().toISOString(),
-      });
-    }
+    const nextPassedCourses =
+      existingIndex !== -1
+        ? progress.passedCourses.filter((pc) => pc.courseId !== courseId)
+        : [
+            ...progress.passedCourses,
+            { courseId, passedDate: new Date().toISOString() },
+          ];
 
-    updatedProgress.lastUpdated = new Date().toISOString();
+    const updatedProgress = {
+      ...progress,
+      passedCourses: nextPassedCourses,
+      lastUpdated: new Date().toISOString(),
+    };
     setProgress(updatedProgress);
     saveProgress(updatedProgress);
   };
