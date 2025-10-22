@@ -1,0 +1,183 @@
+{
+  "curriculum": {
+    "id": "sample-curriculum-001",
+    "name": "چارت پیشنهادی کارشناسی علوم کامپیوتر",
+    "major": "علوم کامپیوتر",
+    "degree": "کارشناسی",
+    "totalUnits": {
+      "min": 139,
+      "max": 142
+    },
+    "categoryRequirements": {
+      "general": 26,
+      "required-basic": 24,
+      "required-core": 15,
+      "required-major": 30,
+      "elective-selection": 15,
+      "elective-guided": 32
+    },
+    "courses": [
+      {
+        "id": "math1",
+        "name": "ریاضی عمومی 1",
+        "units": 3,
+        "category": "required-basic",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": 1
+      },
+      {
+        "id": "math2",
+        "name": "ریاضی عمومی 2",
+        "units": 3,
+        "category": "required-basic",
+        "prerequisites": ["math1"],
+        "corequisites": [],
+        "semester": 2
+      },
+      {
+        "id": "math3",
+        "name": "ریاضی عمومی 3",
+        "units": 3,
+        "category": "required-basic",
+        "prerequisites": ["math2"],
+        "corequisites": [],
+        "semester": 3
+      },
+      {
+        "id": "discrete-math",
+        "name": "مبانی علوم ریاضی",
+        "units": 3,
+        "category": "required-core",
+        "prerequisites": ["math1"],
+        "corequisites": [],
+        "semester": 2
+      },
+      {
+        "id": "linear-algebra",
+        "name": "مبانی جبر خطی",
+        "units": 3,
+        "category": "required-core",
+        "prerequisites": ["math1"],
+        "corequisites": [],
+        "semester": 3
+      },
+      {
+        "id": "intro-programming",
+        "name": "مبانی کامپیوتر و برنامه‌سازی",
+        "units": 3,
+        "category": "required-basic",
+        "prerequisites": [],
+        "corequisites": [],
+        "semester": 1
+      },
+      {
+        "id": "advanced-programming",
+        "name": "برنامه‌سازی پیشرفته",
+        "units": 4,
+        "category": "required-basic",
+        "prerequisites": ["intro-programming"],
+        "corequisites": [],
+        "semester": 2
+      },
+      {
+        "id": "data-structures",
+        "name": "ساختمان داده‌ها و الگوریتم‌ها",
+        "units": 4,
+        "category": "required-major",
+        "prerequisites": ["advanced-programming"],
+        "corequisites": [],
+        "semester": 3
+      },
+      {
+        "id": "discrete-structures",
+        "name": "مبانی ترکیبیات",
+        "units": 3,
+        "category": "required-major",
+        "prerequisites": ["discrete-math"],
+        "corequisites": [],
+        "semester": 2
+      },
+      {
+        "id": "theory-of-machines",
+        "name": "مبانی نظریه محاسبه",
+        "units": 3,
+        "category": "required-major",
+        "prerequisites": ["discrete-math"],
+        "corequisites": [],
+        "semester": 2
+      },
+      {
+        "id": "computer-architecture",
+        "name": "اصول سیستم‌های کامپیوتری",
+        "units": 4,
+        "category": "required-major",
+        "prerequisites": ["advanced-programming"],
+        "corequisites": [],
+        "semester": 3
+      },
+      {
+        "id": "operating-systems",
+        "name": "اصول سیستم‌های عامل",
+        "units": 4,
+        "category": "required-major",
+        "prerequisites": ["data-structures"],
+        "corequisites": [],
+        "semester": 4
+      },
+      {
+        "id": "algorithm-design",
+        "name": "طراحی و تحلیل الگوریتم‌ها",
+        "units": 3,
+        "category": "elective-selection",
+        "prerequisites": ["data-structures", "discrete-structures"],
+        "corequisites": [],
+        "semester": 4
+      },
+      {
+        "id": "database",
+        "name": "پایگاه داده‌ها",
+        "units": 3,
+        "category": "elective-selection",
+        "prerequisites": ["data-structures"],
+        "corequisites": [],
+        "semester": 5
+      },
+      {
+        "id": "computer-networks",
+        "name": "شبکه‌های کامپیوتری",
+        "units": 3,
+        "category": "elective-guided",
+        "prerequisites": ["computer-architecture"],
+        "corequisites": [],
+        "semester": 5
+      },
+      {
+        "id": "ai",
+        "name": "هوش مصنوعی",
+        "units": 3,
+        "category": "elective-guided",
+        "prerequisites": ["data-structures"],
+        "corequisites": [],
+        "semester": 6
+      },
+      {
+        "id": "software-engineering",
+        "name": "اصول طراحی نرم‌افزار",
+        "units": 3,
+        "category": "elective-guided",
+        "prerequisites": ["data-structures"],
+        "corequisites": [],
+        "semester": 6
+      }
+    ],
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  "progress": {
+    "curriculumId": "sample-curriculum-001",
+    "passedCourses": [],
+    "lastUpdated": "2025-01-01T00:00:00.000Z"
+  },
+  "version": "1.0.0"
+}

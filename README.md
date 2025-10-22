@@ -1,69 +1,154 @@
-# React + TypeScript + Vite
+# 🎓 سامانه مدیریت چارت درسی
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+یک وب اپلیکیشن برای مدیریت چارت درسی دانشجویان که به آنها کمک می‌کند تا:
 
-Currently, two official plugins are available:
+- 📚 چارت درسی خود را وارد کنند
+- ✅ درس‌های گذرانده شده را ثبت کنند
+- 🎯 درس‌های قابل اخذ در هر ترم را مشاهده کنند
+- 💾 داده‌های خود را به صورت JSON ذخیره و بارگذاری کنند
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[🚀 شروع سریع](QUICK-START.md)** | **[📖 راهنمای کامل](USAGE-GUIDE.md)** | **[🚢 راهنمای استقرار](DEPLOYMENT.md)**
 
-## Expanding the ESLint configuration
+## ویژگی‌ها
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+✨ **مدیریت کامل دروس**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- افزودن، ویرایش و حذف دروس
+- تعریف پیش‌نیازها و همنیازها
+- دسته‌بندی دروس (عمومی، الزامی، اختیاری و...)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+📊 **پیگیری پیشرفت**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- نمایش تعداد واحدهای گذرانده شده
+- محاسبه درصد پیشرفت
+- تفکیک پیشرفت بر اساس دسته‌بندی دروس
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🎯 **تشخیص دروس قابل اخذ**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- نمایش دروسی که پیش‌نیازهای آنها برآورده شده
+- بررسی خودکار شرایط اخذ درس
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+💾 **ذخیره‌سازی محلی**
+
+- ذخیره خودکار در localStorage
+- امکان خروجی به JSON
+- امکان ورودی از JSON
+
+🎨 **رابط کاربری زیبا**
+
+- طراحی با Tailwind CSS و shadcn/ui
+- پشتیبانی کامل از زبان فارسی و RTL
+- واکنش‌گرا و سازگار با موبایل
+
+## نصب و راه‌اندازی
+
+### پیش‌نیازها
+
+- Node.js 20 یا بالاتر
+- pnpm
+
+### نصب
+
+\`\`\`bash
+
+# کلون کردن مخزن
+
+git clone https://github.com/YOUR_USERNAME/course-hub.git
+cd course-hub
+
+# نصب وابستگی‌ها
+
+pnpm install
+
+# اجرای سرور توسعه
+
+pnpm dev
+\`\`\`
+
+برنامه روی `http://localhost:5173` در دسترس خواهد بود.
+
+### ساخت برای تولید
+
+\`\`\`bash
+pnpm build
+\`\`\`
+
+فایل‌های ساخته شده در پوشه `dist` قرار می‌گیرند.
+
+## استقرار روی GitHub Pages
+
+1. مخزن خود را روی GitHub ایجاد کنید
+2. در تنظیمات مخزن، به بخش Pages بروید
+3. منبع را روی "GitHub Actions" تنظیم کنید
+4. کد را به branch اصلی push کنید
+5. GitHub Actions به صورت خودکار برنامه را build و deploy می‌کند
+
+**نکته مهم:** اگر نام مخزن شما متفاوت از `course-hub` است، فایل `vite.config.ts` را ویرایش کنید و `base` را به نام مخزن خود تغییر دهید:
+
+\`\`\`typescript
+export default defineConfig({
+base: "/YOUR_REPO_NAME/",
+// ...
+});
+\`\`\`
+
+## نحوه استفاده
+
+### راه‌اندازی اولیه
+
+1. اطلاعات دوره تحصیلی خود (رشته، مقطع، تعداد واحد) را وارد کنید
+2. روی "ایجاد چارت درسی" کلیک کنید
+
+### افزودن دروس
+
+1. به تب "مدیریت دروس" بروید
+2. روی "افزودن درس جدید" کلیک کنید
+3. اطلاعات درس شامل نام، تعداد واحد، دسته‌بندی و پیش‌نیازها را وارد کنید
+4. روی "افزودن درس" کلیک کنید
+
+### علامت‌گذاری دروس گذرانده شده
+
+1. در هر کارت درس، روی "علامت به عنوان گذرانده شده" کلیک کنید
+2. یا به تب "دروس گذرانده شده" بروید
+
+### مشاهده دروس قابل اخذ
+
+1. به تب "دروس قابل اخذ" بروید
+2. لیست دروسی که پیش‌نیازهای آنها برآورده شده نمایش داده می‌شود
+
+### خروجی و ورودی داده‌ها
+
+1. در بخش "ورود و خروج داده‌ها" روی "خروجی JSON" کلیک کنید تا فایل ذخیره شود
+2. برای بارگذاری، روی "ورودی JSON" کلیک کرده و فایل قبلی را انتخاب کنید
+
+## تکنولوژی‌ها
+
+- ⚛️ React 19
+- 🎨 Tailwind CSS v4
+- 🧩 shadcn/ui
+- 📘 TypeScript
+- ⚡ Vite
+- 📦 pnpm
+
+## مجوز
+
+MIT
+
+## 📚 مستندات
+
+- **[QUICK-START.md](QUICK-START.md)**: شروع سریع (5 دقیقه)
+- **[USAGE-GUIDE.md](USAGE-GUIDE.md)**: راهنمای کامل استفاده
+- **[DEPLOYMENT.md](DEPLOYMENT.md)**: راهنمای استقرار روی GitHub Pages
+- **[PROJECT-STRUCTURE.md](PROJECT-STRUCTURE.md)**: معماری و ساختار پروژه
+
+## 🤝 مشارکت
+
+Pull requestها خوش‌آمدید! برای تغییرات بزرگ، لطفا ابتدا یک issue باز کنید.
+
+### راه‌های مشارکت
+
+- 🐛 گزارش باگ
+- 💡 پیشنهاد فیچر جدید
+- 📝 بهبود مستندات
+- 🔧 رفع مشکلات
+- 🌍 ترجمه به زبان‌های دیگر
