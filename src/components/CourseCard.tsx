@@ -62,7 +62,7 @@ export const CourseCard = ({
       }`}
     >
       <CardHeader>
-        <div className="flex justify-between items-start">
+        <div className="flex items-start">
           <div className="flex-1">
             <CardTitle className="text-lg">{course.name}</CardTitle>
             <CardDescription className="flex items-center gap-2 mt-1">
@@ -77,7 +77,7 @@ export const CourseCard = ({
           </div>
           {isPassed && (
             <Badge className="bg-green-600 text-white">
-              <BookOpen className="w-3 h-3 ml-1" />
+              <BookOpen className="w-3 h-3 mr-1" />
               گذرانده شده
             </Badge>
           )}

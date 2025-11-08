@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Font Faces */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("@/assets/fonts/Vazirmatn-VariableFont_wght.ttf")
+    format("truetype-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -16,7 +25,7 @@
   --primary: oklch(0.55 0.25 285);
   --primary-foreground: oklch(0.98 0 0);
 
-  --secondary: hsl(212, 100%, 78%); 
+  --secondary: hsl(212, 100%, 78%);
   --secondary-foreground: oklch(0.16 0.02 270);
 
   --muted: oklch(0.95 0.02 280);
@@ -49,7 +58,7 @@
   --sidebar-ring: oklch(0.55 0.25 285);
 
   /* Fonts & Layout */
-  --font-sans: Plus Jakarta Sans, sans-serif;
+  --font-sans: Vazirmatn, sans-serif;
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.9rem;
