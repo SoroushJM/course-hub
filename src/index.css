@@ -1,4 +1,14 @@
 @import "tailwindcss";
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/Vazirmatn-FD-font-face.css');
+
+@theme {
+  --font-sans: "Vazirmatn FD", sans-serif;
+}
+
+:root {
+  font-family: "Vazirmatn FD", sans-serif;
+}
+
 @import "tw-animate-css";
 
 /* Font Faces */
@@ -37,8 +47,8 @@
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(0.9 0.02 285);
-  --input: oklch(84.821% 0.01385 286.006);
+  --border: oklch(0.8 0.02 285);
+  --input: oklch(0.7 0.02 285);
   --ring: oklch(0.55 0.25 285);
 
   --chart-1: oklch(0.72 0.15 155);

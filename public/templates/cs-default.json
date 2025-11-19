@@ -1,0 +1,93 @@
+{
+  "id": "cs-1402",
+  "title": "علوم کامپیوتر - ورودی ۱۴۰۲",
+  "university": "دانشگاه صنعتی شریف",
+  "totalUnitsRequired": 140,
+  "groups": [
+    {
+      "id": "general",
+      "title": "دروس عمومی",
+      "requiredUnits": 26,
+      "courses": [
+        { "id": "gen-1", "title": "فارسی عمومی", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-2", "title": "زبان انگلیسی عمومی", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-3", "title": "اندیشه اسلامی ۱", "units": 2, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-4", "title": "اندیشه اسلامی ۲", "units": 2, "prerequisites": ["gen-3"], "corequisites": [] },
+        { "id": "gen-5", "title": "آیین زندگی", "units": 2, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-6", "title": "تفسیر موضوعی قرآن", "units": 2, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-7", "title": "انقلاب اسلامی", "units": 2, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-8", "title": "تاریخ تحلیلی صدر اسلام", "units": 2, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-9", "title": "تربیت بدنی ۱", "units": 1, "prerequisites": [], "corequisites": [] },
+        { "id": "gen-10", "title": "تربیت بدنی ۲", "units": 1, "prerequisites": ["gen-9"], "corequisites": [] },
+        { "id": "gen-11", "title": "دانش خانواده و جمعیت", "units": 2, "prerequisites": [], "corequisites": [] }
+      ]
+    },
+    {
+      "id": "basic",
+      "title": "دروس الزامی پایه",
+      "requiredUnits": 24,
+      "courses": [
+        { "id": "math-1", "title": "ریاضی عمومی ۱", "units": 4, "prerequisites": [], "corequisites": [] },
+        { "id": "math-2", "title": "ریاضی عمومی ۲", "units": 4, "prerequisites": ["math-1"], "corequisites": [] },
+        { "id": "phys-1", "title": "فیزیک عمومی ۱", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "phys-2", "title": "فیزیک عمومی ۲", "units": 3, "prerequisites": ["phys-1"], "corequisites": [] },
+        { "id": "prob", "title": "مبانی احتمال", "units": 3, "prerequisites": ["math-1"], "corequisites": [] },
+        { "id": "stat", "title": "آمار و کاربردها", "units": 3, "prerequisites": ["prob"], "corequisites": [] },
+        { "id": "cs-math", "title": "ریاضیات گسسته", "units": 3, "prerequisites": ["math-1"], "corequisites": [] }
+      ]
+    },
+    {
+      "id": "core",
+      "title": "دروس الزامی - مشترک هسته",
+      "requiredUnits": 15,
+      "courses": [
+        { "id": "prog-1", "title": "مبانی برنامه‌نویسی", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "prog-2", "title": "برنامه‌نویسی پیشرفته", "units": 3, "prerequisites": ["prog-1"], "corequisites": [] },
+        { "id": "ds", "title": "ساختمان داده‌ها و الگوریتم‌ها", "units": 3, "prerequisites": ["prog-2", "cs-math"], "corequisites": [] },
+        { "id": "logic", "title": "مدارهای منطقی", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "sys", "title": "معماری کامپیوتر", "units": 3, "prerequisites": ["logic"], "corequisites": [] }
+      ]
+    },
+    {
+      "id": "cs-req",
+      "title": "دروس الزامی علوم کامپیوتر",
+      "requiredUnits": 30,
+      "courses": [
+        { "id": "algo", "title": "طراحی الگوریتم‌ها", "units": 3, "prerequisites": ["ds"], "corequisites": [] },
+        { "id": "automata", "title": "نظریه زبان‌ها و ماشین‌ها", "units": 3, "prerequisites": ["ds"], "corequisites": [] },
+        { "id": "os", "title": "سیستم‌های عامل", "units": 3, "prerequisites": ["ds", "sys"], "corequisites": [] },
+        { "id": "db", "title": "پایگاه داده‌ها", "units": 3, "prerequisites": ["ds"], "corequisites": [] },
+        { "id": "ai", "title": "هوش مصنوعی", "units": 3, "prerequisites": ["ds", "prob"], "corequisites": [] },
+        { "id": "compiler", "title": "اصول طراحی کامپایلر", "units": 3, "prerequisites": ["ds"], "corequisites": [] },
+        { "id": "net", "title": "شبکه‌های کامپیوتری", "units": 3, "prerequisites": ["os"], "corequisites": [] },
+        { "id": "se", "title": "مهندسی نرم‌افزار", "units": 3, "prerequisites": ["ds"], "corequisites": [] },
+        { "id": "web", "title": "برنامه‌نویسی وب", "units": 3, "prerequisites": ["prog-1"], "corequisites": [] },
+        { "id": "project", "title": "پروژه کارشناسی", "units": 3, "prerequisites": ["se"], "corequisites": [] }
+      ]
+    },
+    {
+      "id": "elective",
+      "title": "دروس اختیاری",
+      "requiredUnits": 15,
+      "overflowTargetGroupId": "minor",
+      "courses": [
+        { "id": "ml", "title": "یادگیری ماشین", "units": 3, "prerequisites": ["ai", "stat"], "corequisites": [] },
+        { "id": "cv", "title": "بینایی ماشین", "units": 3, "prerequisites": ["ai"], "corequisites": [] },
+        { "id": "nlp", "title": "پردازش زبان طبیعی", "units": 3, "prerequisites": ["ai"], "corequisites": [] },
+        { "id": "sec", "title": "امنیت داده‌ها", "units": 3, "prerequisites": ["net"], "corequisites": [] },
+        { "id": "dist", "title": "سیستم‌های توزیع‌شده", "units": 3, "prerequisites": ["os"], "corequisites": [] },
+        { "id": "graph", "title": "نظریه گراف", "units": 3, "prerequisites": ["cs-math"], "corequisites": [] }
+      ]
+    },
+    {
+      "id": "minor",
+      "title": "دروس کهاد",
+      "requiredUnits": 32,
+      "courses": [
+        { "id": "minor-1", "title": "درس کهاد ۱", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "minor-2", "title": "درس کهاد ۲", "units": 3, "prerequisites": [], "corequisites": [] },
+        { "id": "minor-3", "title": "درس کهاد ۳", "units": 3, "prerequisites": [], "corequisites": [] }
+      ]
+    }
+  ]
+}
