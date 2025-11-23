@@ -48,10 +48,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
       <footer className="border-t border-border/40 py-8 bg-background/50 backdrop-blur-sm mt-auto">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            ساخته شده با <span className="text-red-500 animate-pulse">❤️</span>{" "}
-            برای دانشجویان. متن باز در GitHub.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-center text-sm leading-loose text-muted-foreground md:text-right">
+              ساخته شده با{" "}
+              <span className="text-red-500 animate-pulse">❤️</span> برای
+              دانشجویان. متن باز در GitHub.
+            </p>
+            <p className="text-center text-xs text-muted-foreground/80 md:text-right">
+              اگر مشکلی مشاهده کردید، لطفاً در گیت‌هاب Issue ثبت کنید. ستاره
+              دادن به پروژه هم یادتون نره! ⭐
+            </p>
+          </div>
         </div>
       </footer>
     </div>
