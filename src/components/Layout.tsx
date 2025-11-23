@@ -58,6 +58,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               اگر مشکلی مشاهده کردید، لطفاً در گیت‌هاب Issue ثبت کنید. ستاره
               دادن به پروژه هم یادتون نره! ⭐
             </p>
+            <div className="mt-2">
+              <a href="#/help" className="text-xs text-primary hover:underline">
+                راهنمای استفاده
+              </a>
+            </div>
           </div>
         </div>
       </footer>
