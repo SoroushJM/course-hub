@@ -4,7 +4,11 @@ import { CourseGroup } from '../components/CourseGroup';
 import { Button } from "../components/ui/button";
 import { Download, Upload, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { CourseGroup as ICourseGroup, Course } from "../types";
+import type {
+  CourseGroup as ICourseGroup,
+  Course,
+  UserProgress,
+} from "../types";
 
 export const Dashboard: React.FC = () => {
   const { template, userProgress, loadTemplate, resetProgress, isLoading } =
@@ -82,7 +86,7 @@ export const Dashboard: React.FC = () => {
       fileReader.readAsText(event.target.files[0], "UTF-8");
       fileReader.onload = (e) => {
         if (e.target?.result) {
-          const parsed = JSON.parse(e.target.result as string);
+          const parsed = JSON.parse(e.target.result as string) as UserProgress;
           useCurriculum.setState({ userProgress: parsed });
         }
       };
@@ -144,20 +148,23 @@ export const Dashboard: React.FC = () => {
           <div className="flex justify-center md:justify-end">
             <div className="relative w-48 h-48 md:w-56 md:h-56 flex items-center justify-center">
               {/* Circular Progress Background */}
-              <svg className="w-full h-full transform -rotate-90">
+              <svg
+                className="w-full h-full transform -rotate-90"
+                viewBox="0 0 100 100"
+              >
                 <circle
-                  cx="50%"
-                  cy="50%"
-                  r="45%"
+                  cx="50"
+                  cy="50"
+                  r="45"
                   className="stroke-white/20 fill-none"
-                  strokeWidth="12"
+                  strokeWidth="5"
                 />
                 <circle
-                  cx="50%"
-                  cy="50%"
-                  r="45%"
+                  cx="50"
+                  cy="50"
+                  r="45"
                   className="stroke-white fill-none transition-all duration-1000 ease-out"
-                  strokeWidth="12"
+                  strokeWidth="5"
                   strokeDasharray="283"
                   strokeDashoffset={283 - (283 * progressPercent) / 100}
                   strokeLinecap="round"

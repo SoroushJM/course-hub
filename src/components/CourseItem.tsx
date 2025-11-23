@@ -17,11 +17,23 @@ interface CourseItemProps {
 }
 
 export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
-  const { userProgress, toggleCourse, isPrerequisiteMet } = useCurriculum();
-  
-  const passedCourse = userProgress.passedCourses.find((c: PassedCourse) => c.courseId === course.id);
+  const { userProgress, toggleCourse, isPrerequisiteMet, template } =
+    useCurriculum();
+
+  const passedCourse = userProgress.passedCourses.find(
+    (c: PassedCourse) => c.courseId === course.id
+  );
   const isPassed = !!passedCourse;
   const isPrereqMet = isPrerequisiteMet(course);
+
+  const getCourseName = (id: string) => {
+    if (!template) return id;
+    for (const group of template.groups) {
+      const found = group.courses.find((c) => c.id === id);
+      if (found) return found.title;
+    }
+    return id;
+  };
 
   const handleToggle = () => {
     toggleCourse(course.id);
@@ -87,7 +99,9 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
               <div className="flex items-center gap-1 text-[11px] text-muted-foreground bg-muted/30 px-2 py-0.5 rounded-full">
                 <span className="opacity-70">پیش‌نیاز:</span>
                 <span className="font-medium">
-                  {course.prerequisites.join("، ")}
+                  {course.prerequisites
+                    .map((id) => getCourseName(id))
+                    .join("، ")}
                 </span>
               </div>
             )}

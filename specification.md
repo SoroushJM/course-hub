@@ -19,6 +19,7 @@ The application allows users to:
 *   **Hosting:** GitHub Pages (Static hosting).
 *   **Backend:** None. All data persists in `localStorage`.
 *   **Data Interchange:** JSON files.
+*   **Package Manager:** **pnpm** (Strictly enforced).
 
 ## 3. Architecture & Data Flow
 
@@ -92,6 +93,9 @@ interface PassedCourse {
     *   If empty: Show "Select Major" screen (fetch `registry.json`) OR "Import JSON" OR "Create New".
     *   If data exists: Load the Template and the User Progress.
 *   **Display:** Render `CourseGroup` components dynamically. Do not hardcode "General" or "Basic". Iterate through the `groups` array.
+*   **Visual Elements:**
+    *   **Circular Progress Bar:** Implemented using SVG with a fixed `viewBox="0 0 100 100"` and absolute coordinates to ensure accurate progress representation regardless of screen size.
+    *   **Prerequisites Display:** When showing prerequisites for a course, display the **Course Title** (e.g., "ریاضی ۱") instead of the raw ID.
 *   **Status Indicators:**
     *   **Not Passed:** Default state.
     *   **Passed:** Green checkmark.
@@ -103,7 +107,7 @@ interface PassedCourse {
     *   Add/Remove Group.
     *   Set `overflowTargetGroupId` (Dropdown showing other groups).
     *   Add Course (Inputs: Name, Units).
-    *   Set Prerequisites (Multi-select Dropdown of *already added* courses).
+    *   Set Prerequisites: Use a **Multi-select Dropdown with Search (ComboBox)** to select from existing courses. This replaces simple text inputs to improve usability.
 *   **Export:** Button to "Download Template JSON" (for making a PR to GitHub).
 
 ### 4.3. Unit Calculation & Overflow Logic (Crucial)
