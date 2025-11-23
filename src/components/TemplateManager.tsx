@@ -36,7 +36,7 @@ export const TemplateManager: React.FC = () => {
     {
       id: "cs-1402",
       title: "علوم کامپیوتر - ورودی ۱۴۰۲",
-      university: "دانشگاه صنعتی شریف",
+      university: "دانشگاه علوم تحقیقات",
     },
     // Add more here if needed
   ];
