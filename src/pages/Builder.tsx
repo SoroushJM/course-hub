@@ -213,7 +213,7 @@ export const Builder: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
             <Link to="/">
@@ -222,13 +222,17 @@ export const Builder: React.FC = () => {
           </Button>
           <h1 className="text-2xl font-bold">ویرایشگر چارت</h1>
         </div>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-2 w-full md:w-auto">
           <TemplateManager />
-          <Button variant="outline" onClick={handleExport}>
+          <Button
+            variant="outline"
+            onClick={handleExport}
+            className="w-full sm:w-auto"
+          >
             <Save className="ml-2 h-4 w-4" />
             دانلود JSON
           </Button>
-          <Button onClick={handleSaveVersion}>
+          <Button onClick={handleSaveVersion} className="w-full sm:w-auto">
             <Save className="ml-2 h-4 w-4" />
             ذخیره نسخه جدید
           </Button>

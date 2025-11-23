@@ -126,7 +126,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-violet-600 to-purple-700 p-8 text-white shadow-2xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-violet-600 to-purple-700 p-4 md:p-8 text-white shadow-2xl">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="relative z-10 grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-4">
@@ -220,18 +220,18 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Actions Bar */}
-      <div className="flex flex-wrap gap-4 justify-between items-center bg-card/50 backdrop-blur-sm p-4 rounded-2xl border border-border/50 shadow-sm">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <span className="text-sm">مدیریت چارت:</span>
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card/50 backdrop-blur-sm p-4 rounded-2xl border border-border/50 shadow-sm">
+        <div className="flex items-center gap-2 text-muted-foreground w-full md:w-auto justify-center md:justify-start">
+          <span className="text-sm whitespace-nowrap">مدیریت چارت:</span>
         </div>
-        <div className="flex gap-3">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 w-full md:w-auto">
           <TemplateManager />
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                className="text-destructive hover:text-destructive hover:bg-destructive/10 w-full sm:w-auto"
               >
                 <RotateCcw className="ml-2 h-4 w-4" />
                 بازنشانی پیشرفت
@@ -262,7 +262,7 @@ export const Dashboard: React.FC = () => {
             variant="outline"
             size="sm"
             asChild
-            className="border-primary/20 hover:border-primary/50 hover:bg-primary/5"
+            className="border-primary/20 hover:border-primary/50 hover:bg-primary/5 w-full sm:w-auto"
           >
             <Link to="/builder">ویرایش / ساخت چارت</Link>
           </Button>
