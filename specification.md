@@ -4,7 +4,7 @@
 **UniChart** is a client-side, open-source web application designed to help university students (specifically starting with Computer Science) plan their curriculum ("Chart-e Darsi").
 The application allows users to:
 1.  View a curriculum template (Courses, Groups, Prerequisites).
-2.  Create/Edit curriculum templates (Builder Mode).
+2.  Create/Edit curriculum templates (Builder Mode) with **Versioning Support**.
 3.  Track their progress by marking courses as passed and assigning a semester.
 4.  Export their data (JSON) to share or move devices.
 
@@ -37,7 +37,7 @@ The application uses these specific data structures to ensure the "Overflow" and
 ```typescript
 // 1. The Template (The Map)
 interface CurriculumTemplate {
-  id: string;
+  id: string; // Official: "cs-1402", Custom: "cs-1402.v1"
   title: string; // e.g., "علوم کامپیوتر - ورودی ۱۴۰۲"
   university: string;
   totalUnitsRequired: number;
@@ -60,7 +60,7 @@ interface CourseGroup {
 
 // 3. The Course
 interface Course {
-  id: string;
+  id: string; // SAME AS TITLE (Enforced by Builder)
   title: string; // e.g., "ریاضی عمومی ۱"
   units: number; // e.g., 3
   
@@ -102,13 +102,24 @@ interface PassedCourse {
     *   **Locked:** Visual indication (greyed out) if prerequisites are not met (but see Logic 4.4).
 
 ### 4.2. The "Builder" (Editor Mode)
-*   A GUI form to create `CurriculumTemplate` JSON.
+*   A GUI form to create/edit `CurriculumTemplate` JSON.
+*   **Template Manager:**
+    *   Allows switching between "Official Templates" and "My Custom Templates".
+    *   **Versioning:** Editing an official template creates a `.v1` version. Editing a `.v1` creates `.v2`.
+    *   **Deletion:** Users can delete custom templates via a Shadcn **Alert Dialog** (RTL support required).
+*   **Course Management:**
+    *   **ID Handling:** The "ID" input is hidden. The **Course Name** acts as the ID.
+    *   **Uniqueness Enforcement:** 
+        *   Validation occurs on **Blur** (focus lost) and **Save**.
+        *   If a duplicate name is detected, a Persian **Alert Dialog** appears, and the change is reverted.
+    *   **Cascading Updates:** Renaming a course automatically updates all prerequisite/corequisite references in other courses.
 *   **Actions:**
     *   Add/Remove Group.
     *   Set `overflowTargetGroupId` (Dropdown showing other groups).
     *   Add Course (Inputs: Name, Units).
-    *   Set Prerequisites: Use a **Multi-select Dropdown with Search (ComboBox)** to select from existing courses. This replaces simple text inputs to improve usability.
+    *   Set Prerequisites: Use a **Multi-select Dropdown with Search (ComboBox)** to select from existing courses.
 *   **Export:** Button to "Download Template JSON" (for making a PR to GitHub).
+*   **Save:** "Save Version" button to persist changes to `localStorage` as a new version.
 
 ### 4.3. Unit Calculation & Overflow Logic (Crucial)
 The application must calculate totals in real-time.
@@ -138,3 +149,4 @@ The application must calculate totals in real-time.
     *   **Accordion:** Use Shadcn Accordions for Course Groups (Expand/Collapse).
     *   **Progress Bar:** Visual bar at the top showing % of total degree completion.
     *   **Alerts:** Use for "Ejaze Grooh" (Department Permission) notes inside groups.
+    *   **Dialogs:** Use Shadcn `AlertDialog` for dangerous actions (Delete) and critical errors (Duplicate Names).

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCurriculum } from '../store';
 import { CourseGroup } from '../components/CourseGroup';
+import { TemplateManager } from "../components/TemplateManager";
 import { Button } from "../components/ui/button";
 import { Download, Upload, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -9,6 +10,18 @@ import type {
   Course,
   UserProgress,
 } from "../types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 export const Dashboard: React.FC = () => {
   const { template, userProgress, loadTemplate, resetProgress, isLoading } =
@@ -86,8 +99,25 @@ export const Dashboard: React.FC = () => {
       fileReader.readAsText(event.target.files[0], "UTF-8");
       fileReader.onload = (e) => {
         if (e.target?.result) {
-          const parsed = JSON.parse(e.target.result as string) as UserProgress;
-          useCurriculum.setState({ userProgress: parsed });
+          try {
+            const parsed = JSON.parse(
+              e.target.result as string
+            ) as UserProgress;
+
+            // Validation: Check if progress matches current template
+            if (parsed.templateId !== template.id) {
+              toast.error(
+                `این فایل پیشرفت مربوط به چارت ${parsed.templateId} است، اما چارت فعلی ${template.id} است.`
+              );
+              return;
+            }
+
+            useCurriculum.setState({ userProgress: parsed });
+            toast.success("پیشرفت با موفقیت بارگذاری شد");
+          } catch (err) {
+            console.error(err);
+            toast.error("خطا در خواندن فایل پیشرفت");
+          }
         }
       };
     }
@@ -100,6 +130,14 @@ export const Dashboard: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="relative z-10 grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-4">
+            <div className="space-y-1 mb-2">
+              <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                {template.university}
+              </div>
+              <h2 className="text-lg font-medium text-white/90 opacity-90">
+                {template.title}
+              </h2>
+            </div>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
               پیشرفت تحصیلی شما
             </h1>
@@ -121,7 +159,7 @@ export const Dashboard: React.FC = () => {
                 className="gap-2 shadow-lg hover:shadow-xl transition-all"
               >
                 <Download className="h-4 w-4" />
-                خروجی گرفتن
+                خروجی پیشرفت
               </Button>
               <div className="relative">
                 <input
@@ -138,7 +176,7 @@ export const Dashboard: React.FC = () => {
                 >
                   <label htmlFor="import-file" className="cursor-pointer">
                     <Upload className="h-4 w-4" />
-                    بارگذاری فایل
+                    وارد کردن پیشرفت
                   </label>
                 </Button>
               </div>
@@ -187,15 +225,39 @@ export const Dashboard: React.FC = () => {
           <span className="text-sm">مدیریت چارت:</span>
         </div>
         <div className="flex gap-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={resetProgress}
-            className="text-destructive hover:text-destructive hover:bg-destructive/10"
-          >
-            <RotateCcw className="ml-2 h-4 w-4" />
-            بازنشانی پیشرفت
-          </Button>
+          <TemplateManager />
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:text-destructive hover:bg-destructive/10"
+              >
+                <RotateCcw className="ml-2 h-4 w-4" />
+                بازنشانی پیشرفت
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  آیا از بازنشانی پیشرفت اطمینان دارید؟
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  این عمل غیرقابل بازگشت است. تمام درس‌های پاس شده و نمرات شما
+                  پاک خواهند شد.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>انصراف</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={resetProgress}
+                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                >
+                  بله، بازنشانی کن
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <Button
             variant="outline"
             size="sm"

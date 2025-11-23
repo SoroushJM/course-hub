@@ -10,11 +10,20 @@ import { ArrowRight, Plus, Save, Trash2 } from "lucide-react";
 import { TemplateManager } from "@/components/TemplateManager";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { MultiSelectCourse } from "@/components/MultiSelectCourse";
-
+import { CourseEditorItem } from "@/components/CourseEditorItem";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export const Builder: React.FC = () => {
   const { template, saveTemplateVersion } = useCurriculum();
+  const [duplicateError, setDuplicateError] = useState<string | null>(null);
 
   // Initialize state with existing template or empty default
   const [localTemplate, setLocalTemplate] = useState<CurriculumTemplate>(
@@ -35,6 +44,13 @@ export const Builder: React.FC = () => {
   }, [template]);
 
   const handleSaveVersion = () => {
+    // Final validation before save
+    const titles = getAllCourseTitles();
+    const uniqueTitles = new Set(titles);
+    if (titles.length !== uniqueTitles.size) {
+      setDuplicateError("نام برخی از دروس تکراری است. لطفا اصلاح کنید.");
+      return;
+    }
     saveTemplateVersion(localTemplate);
     toast.success("نسخه جدید ذخیره شد");
   };
@@ -118,85 +134,71 @@ export const Builder: React.FC = () => {
     });
   };
 
-  const removeCourse = (groupId: string, courseId: string) => {
+  const removeCourse = (courseId: string) => {
     setLocalTemplate({
       ...localTemplate,
-      groups: localTemplate.groups.map((g) => {
-        if (g.id === groupId) {
-          return { ...g, courses: g.courses.filter((c) => c.id !== courseId) };
-        }
-        return g;
-      }),
+      groups: localTemplate.groups.map((g) => ({
+        ...g,
+        courses: g.courses.filter((c) => c.id !== courseId),
+      })),
     });
   };
 
   const updateCourse = (
-    groupId: string,
     courseId: string,
     field: keyof Course,
     value: string | number | string[]
   ) => {
-    // Handle Title Change (which changes ID)
-    if (field === "title") {
-      const newTitle = value as string;
-      if (newTitle === courseId) return; // No change
-
-      // Check uniqueness
-      const existingTitles = getAllCourseTitles();
-      // We exclude the current course's title from the check effectively by checking if it exists AND it's not THIS course.
-      // But since we have the list of ALL titles, we just check if it includes the new title.
-      // Wait, if I rename "A" to "B", and "B" exists, that's a collision.
-      if (existingTitles.includes(newTitle)) {
-        toast.error("نام درس تکراری است. لطفا نام دیگری انتخاب کنید.");
-        return;
-      }
-
-      // Proceed with update:
-      // 1. Update this course's title AND id
-      // 2. Update ALL other courses' prerequisites/corequisites that referenced the old ID
-
-      const oldId = courseId;
-      const newId = newTitle;
-
-      const newGroups = localTemplate.groups.map((g) => ({
-        ...g,
-        courses: g.courses.map((c) => {
-          // Update the target course
-          if (c.id === oldId) {
-            return { ...c, title: newTitle, id: newId };
-          }
-          // Update references in other courses
-          return {
-            ...c,
-            prerequisites: c.prerequisites.map((p) =>
-              p === oldId ? newId : p
-            ),
-            corequisites: c.corequisites.map((co) =>
-              co === oldId ? newId : co
-            ),
-          };
-        }),
-      }));
-
-      setLocalTemplate({ ...localTemplate, groups: newGroups });
-      return;
-    }
-
-    // Normal update
     setLocalTemplate({
       ...localTemplate,
-      groups: localTemplate.groups.map((g) => {
-        if (g.id === groupId) {
-          return {
-            ...g,
-            courses: g.courses.map((c) =>
-              c.id === courseId ? { ...c, [field]: value } : c
-            ),
-          };
-        }
-        return g;
-      }),
+      groups: localTemplate.groups.map((g) => ({
+        ...g,
+        courses: g.courses.map((c) =>
+          c.id === courseId ? { ...c, [field]: value } : c
+        ),
+      })),
     });
+  };
+
+  const handleRenameRequest = async (
+    courseId: string,
+    newTitle: string
+  ): Promise<boolean> => {
+    // Check uniqueness
+    const existingTitles = getAllCourseTitles();
+    // Check if newTitle exists AND it's not the current course's title (which shouldn't happen here anyway as we check for change in child)
+    // Actually, we just check if newTitle is in the list of ALL titles.
+    // But wait, the list contains the OLD title of this course.
+    // So if I rename "A" to "B", and "B" exists, it's a dupe.
+    if (existingTitles.includes(newTitle)) {
+      setDuplicateError(
+        `نام درس "${newTitle}" تکراری است. هر درس باید نام منحصر به فرد داشته باشد.`
+      );
+      return false;
+    }
+
+    // If unique, commit the change (update ID and cascade)
+    const oldId = courseId;
+    const newId = newTitle;
+
+    const newGroups = localTemplate.groups.map((g) => ({
+      ...g,
+      courses: g.courses.map((c) => {
+        // Update the target course ID
+        if (c.id === oldId) {
+          return { ...c, id: newId, title: newTitle };
+        }
+        // Update references in other courses
+        return {
+          ...c,
+          prerequisites: c.prerequisites.map((p) => (p === oldId ? newId : p)),
+          corequisites: c.corequisites.map((co) => (co === oldId ? newId : co)),
+        };
+      }),
+    }));
+
+    setLocalTemplate({ ...localTemplate, groups: newGroups });
+    return true;
   };
 
   const allCourses = localTemplate.groups
@@ -336,67 +338,14 @@ export const Builder: React.FC = () => {
               <Separator className="my-4" />
               <div className="space-y-4">
                 {group.courses.map((course) => (
-                  <div
+                  <CourseEditorItem
                     key={course.id}
-                    className="flex items-end gap-2 p-2 bg-muted/30 rounded-md"
-                  >
-                    <div className="grid gap-2 flex-1 md:grid-cols-3">
-                      <div className="space-y-1">
-                        <Label className="text-xs">نام درس (شناسه)</Label>
-                        <Input
-                          className="h-8"
-                          value={course.title}
-                          onChange={(e) =>
-                            updateCourse(
-                              group.id,
-                              course.id,
-                              "title",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">واحد</Label>
-                        <Input
-                          className="h-8"
-                          type="number"
-                          value={course.units}
-                          onChange={(e) =>
-                            updateCourse(
-                              group.id,
-                              course.id,
-                              "units",
-                              parseInt(e.target.value) || 0
-                            )
-                          }
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">پیش‌نیاز</Label>
-                        <MultiSelectCourse
-                          options={allCourses.filter((c) => c.id !== course.id)}
-                          selected={course.prerequisites}
-                          onChange={(selected) =>
-                            updateCourse(
-                              group.id,
-                              course.id,
-                              "prerequisites",
-                              selected
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-destructive"
-                      onClick={() => removeCourse(group.id, course.id)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
+                    course={course}
+                    allCourses={allCourses}
+                    onUpdate={updateCourse}
+                    onRemove={removeCourse}
+                    onRenameRequest={handleRenameRequest}
+                  />
                 ))}
                 <Button
                   variant="outline"
@@ -421,6 +370,25 @@ export const Builder: React.FC = () => {
           افزودن گروه درسی جدید
         </Button>
       </div>
+
+      <AlertDialog
+        open={!!duplicateError}
+        onOpenChange={(open) => {
+          if (!open) setDuplicateError(null);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>خطای تکرار نام درس</AlertDialogTitle>
+            <AlertDialogDescription>{duplicateError}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setDuplicateError(null)}>
+              متوجه شدم
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

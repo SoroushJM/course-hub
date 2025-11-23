@@ -14,6 +14,7 @@ interface CurriculumState {
   toggleCourse: (courseId: string, term?: number) => void;
   setTemplate: (template: CurriculumTemplate) => void;
   saveTemplateVersion: (template: CurriculumTemplate) => void;
+  importTemplate: (template: CurriculumTemplate) => void;
   deleteCustomTemplate: (templateId: string) => void;
   resetProgress: () => void;
 
@@ -85,7 +86,6 @@ const curriculumStore: StateCreator<
     set((state) => {
       const { customTemplates } = state;
       let nextId = newTemplate.id;
-      let title = newTemplate.title;
 
       // Logic:
       // If ID has .vX suffix, extract base ID and version.
@@ -120,18 +120,27 @@ const curriculumStore: StateCreator<
       const nextVersion = maxVersion + 1;
       nextId = `${baseId}.v${nextVersion}`;
 
-      // Update title to reflect version if not already present
-      // If title ends with (vX), replace it. Else append.
-      const titleVersionMatch = title.match(/^(.*)\s\(v\d+\)$/);
-      const baseTitle = titleVersionMatch ? titleVersionMatch[1] : title;
-      title = `${baseTitle} (v${nextVersion})`;
-
-      const templateToSave = { ...newTemplate, id: nextId, title };
+      // Title logic: Keep the title exactly as is. Do NOT append version.
+      const templateToSave = { ...newTemplate, id: nextId };
 
       return {
         customTemplates: [...customTemplates, templateToSave],
         template: templateToSave,
         userProgress: { ...state.userProgress, templateId: nextId },
+      };
+    });
+  },
+
+  importTemplate: (newTemplate: CurriculumTemplate) => {
+    set((state) => {
+      // Remove existing if any (overwrite)
+      const otherTemplates = state.customTemplates.filter(
+        (t) => t.id !== newTemplate.id
+      );
+      return {
+        customTemplates: [...otherTemplates, newTemplate],
+        template: newTemplate,
+        userProgress: { ...state.userProgress, templateId: newTemplate.id },
       };
     });
   },

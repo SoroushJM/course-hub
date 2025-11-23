@@ -22,17 +22,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import { Button } from "../components/ui/button";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import { LayoutGrid, FileJson, Trash2, Check } from "lucide-react";
+import { LayoutGrid, FileJson, Trash2, Check, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 export const TemplateManager: React.FC = () => {
-  const { customTemplates, loadTemplate, deleteCustomTemplate, template } = useCurriculum();
+  const { customTemplates, loadTemplate, deleteCustomTemplate, template } =
+    useCurriculum();
   const [isOpen, setIsOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   // Hardcoded official templates for now (could be fetched from registry.json in future)
   const officialTemplates = [
-    { id: 'cs-1402', title: 'علوم کامپیوتر - ورودی ۱۴۰۲', university: 'دانشگاه صنعتی شریف' },
+    {
+      id: "cs-1402",
+      title: "علوم کامپیوتر - ورودی ۱۴۰۲",
+      university: "دانشگاه صنعتی شریف",
+    },
     // Add more here if needed
   ];
 
@@ -63,7 +68,8 @@ export const TemplateManager: React.FC = () => {
           <DialogHeader>
             <DialogTitle>انتخاب چارت درسی</DialogTitle>
             <DialogDescription>
-              چارت مورد نظر خود را انتخاب کنید یا چارت‌های شخصی خود را مدیریت کنید.
+              چارت مورد نظر خود را انتخاب کنید یا چارت‌های شخصی خود را مدیریت
+              کنید.
             </DialogDescription>
           </DialogHeader>
 
@@ -72,21 +78,27 @@ export const TemplateManager: React.FC = () => {
               <TabsTrigger value="official">چارت‌های رسمی</TabsTrigger>
               <TabsTrigger value="custom">چارت‌های من</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="official" className="mt-4">
               <ScrollArea className="h-[400px] pr-4">
                 <div className="grid gap-4">
                   {officialTemplates.map((t) => (
-                    <Card 
-                      key={t.id} 
-                      className={`cursor-pointer transition-all hover:border-primary/50 hover:bg-muted/50 ${template?.id === t.id ? 'border-primary bg-primary/5' : ''}`}
+                    <Card
+                      key={t.id}
+                      className={`cursor-pointer transition-all hover:border-primary/50 hover:bg-muted/50 ${
+                        template?.id === t.id
+                          ? "border-primary bg-primary/5"
+                          : ""
+                      }`}
                       onClick={() => handleLoad(t.id)}
                     >
                       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-base font-medium">
                           {t.title}
                         </CardTitle>
-                        {template?.id === t.id && <Check className="h-4 w-4 text-primary" />}
+                        {template?.id === t.id && (
+                          <Check className="h-4 w-4 text-primary" />
+                        )}
                       </CardHeader>
                       <CardContent>
                         <CardDescription>{t.university}</CardDescription>
@@ -96,7 +108,7 @@ export const TemplateManager: React.FC = () => {
                 </div>
               </ScrollArea>
             </TabsContent>
-            
+
             <TabsContent value="custom" className="mt-4">
               <ScrollArea className="h-[400px] pr-4">
                 {customTemplates.length === 0 ? (
@@ -107,20 +119,29 @@ export const TemplateManager: React.FC = () => {
                 ) : (
                   <div className="grid gap-4">
                     {customTemplates.map((t) => (
-                      <Card 
-                        key={t.id} 
-                        className={`cursor-pointer transition-all hover:border-primary/50 hover:bg-muted/50 ${template?.id === t.id ? 'border-primary bg-primary/5' : ''}`}
+                      <Card
+                        key={t.id}
+                        className={`cursor-pointer transition-all hover:border-primary/50 hover:bg-muted/50 ${
+                          template?.id === t.id
+                            ? "border-primary bg-primary/5"
+                            : ""
+                        }`}
                         onClick={() => handleLoad(t.id)}
                       >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                          <CardTitle className="text-base font-medium truncate max-w-[300px]" title={t.title}>
+                          <CardTitle
+                            className="text-base font-medium truncate max-w-[300px]"
+                            title={t.title}
+                          >
                             {t.title}
                           </CardTitle>
                           <div className="flex items-center gap-2">
-                            {template?.id === t.id && <Check className="h-4 w-4 text-primary" />}
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
+                            {template?.id === t.id && (
+                              <Check className="h-4 w-4 text-primary" />
+                            )}
+                            <Button
+                              variant="ghost"
+                              size="icon"
                               className="h-8 w-8 text-muted-foreground hover:text-destructive"
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -134,7 +155,9 @@ export const TemplateManager: React.FC = () => {
                         <CardContent>
                           <CardDescription className="flex justify-between">
                             <span>{t.university}</span>
-                            <span className="text-xs bg-muted px-2 py-1 rounded-full font-mono">{t.id}</span>
+                            <span className="text-xs bg-muted px-2 py-1 rounded-full font-mono">
+                              {t.id}
+                            </span>
                           </CardDescription>
                         </CardContent>
                       </Card>
@@ -144,20 +167,78 @@ export const TemplateManager: React.FC = () => {
               </ScrollArea>
             </TabsContent>
           </Tabs>
+
+          <div className="mt-4 pt-4 border-t flex justify-end">
+            <div className="relative">
+              <input
+                type="file"
+                id="load-template-json"
+                className="hidden"
+                accept=".json"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    try {
+                      const json = JSON.parse(event.target?.result as string);
+                      // Validation: Check for required template fields
+                      if (
+                        !json.id ||
+                        !json.title ||
+                        !json.groups ||
+                        typeof json.totalUnitsRequired !== "number"
+                      ) {
+                        toast.error("فایل انتخاب شده یک چارت معتبر نیست");
+                        return;
+                      }
+
+                      // It seems valid
+                      useCurriculum.getState().importTemplate(json);
+                      toast.success("چارت با موفقیت بارگذاری شد");
+                      setIsOpen(false);
+                    } catch (err) {
+                      console.error(err);
+                      toast.error("خطا در خواندن فایل");
+                    }
+                  };
+                  reader.readAsText(file);
+                  // Reset input
+                  e.target.value = "";
+                }}
+              />
+              <Button variant="outline" className="gap-2" asChild>
+                <label htmlFor="load-template-json" className="cursor-pointer">
+                  <Upload className="h-4 w-4" />
+                  بارگذاری فایل چارت
+                </label>
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
 
-      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+      <AlertDialog
+        open={!!deleteId}
+        onOpenChange={(open) => !open && setDeleteId(null)}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>آیا از حذف این چارت مطمئن هستید؟</AlertDialogTitle>
+            <AlertDialogTitle>
+              آیا از حذف این چارت مطمئن هستید؟
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              این عملیات غیرقابل بازگشت است. این چارت برای همیشه از حافظه مرورگر شما پاک خواهد شد.
+              این عملیات غیرقابل بازگشت است. این چارت برای همیشه از حافظه مرورگر
+              شما پاک خواهد شد.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>انصراف</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
               حذف
             </AlertDialogAction>
           </AlertDialogFooter>
