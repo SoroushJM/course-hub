@@ -90,7 +90,7 @@ interface PassedCourse {
 
 ### 4.1. The "Dashboard" (Tracker Mode)
 *   **Loading:** On load, check `localStorage`.
-    *   If empty: Show "Select Major" screen (fetch `registry.json`) OR "Import JSON" OR "Create New".
+    *   If empty: Show "Select Major" screen (fetch `registry.json`) OR "Import Progress" OR "Create New".
     *   If data exists: Load the Template and the User Progress.
 *   **Display:** Render `CourseGroup` components dynamically. Do not hardcode "General" or "Basic". Iterate through the `groups` array.
 *   **Visual Elements:**
@@ -100,12 +100,20 @@ interface PassedCourse {
     *   **Not Passed:** Default state.
     *   **Passed:** Green checkmark.
     *   **Locked:** Visual indication (greyed out) if prerequisites are not met (but see Logic 4.4).
+*   **Actions:**
+    *   **Export Progress:** Button to download `UserProgress` JSON.
+    *   **Import Progress:** Button to upload `UserProgress` JSON.
+        *   **Validation:** Must check if the imported `templateId` matches the currently active template. If not, show an error.
+    *   **Reset Progress:** Button to clear all progress. Must show a confirmation **Alert Dialog** before action.
 
 ### 4.2. The "Builder" (Editor Mode)
 *   A GUI form to create/edit `CurriculumTemplate` JSON.
 *   **Template Manager:**
     *   Allows switching between "Official Templates" and "My Custom Templates".
+    *   **Load JSON:** Ability to load a template JSON file from the user's device.
+        *   **Validation:** Must verify the file has required template fields (`id`, `title`, `groups`).
     *   **Versioning:** Editing an official template creates a `.v1` version. Editing a `.v1` creates `.v2`.
+        *   **Note:** Versioning only affects the `id`. The `title` remains unchanged.
     *   **Deletion:** Users can delete custom templates via a Shadcn **Alert Dialog** (RTL support required).
 *   **Course Management:**
     *   **ID Handling:** The "ID" input is hidden. The **Course Name** acts as the ID.
@@ -120,6 +128,7 @@ interface PassedCourse {
     *   Set Prerequisites: Use a **Multi-select Dropdown with Search (ComboBox)** to select from existing courses.
 *   **Export:** Button to "Download Template JSON" (for making a PR to GitHub).
 *   **Save:** "Save Version" button to persist changes to `localStorage` as a new version.
+    *   **Logic:** Increments the version suffix of the ID (e.g., `cs-1402.v1` -> `cs-1402.v2`) but keeps the Title as is.
 
 ### 4.3. Unit Calculation & Overflow Logic (Crucial)
 The application must calculate totals in real-time.
