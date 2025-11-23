@@ -1,8 +1,8 @@
 {
-  "id": "cs-1402",
-  "title": "علوم کامپیوتر - ورودی ۱۴۰۲",
+  "id": "cs-1399",
+  "title": "علوم کامپیوتر - ورودی 1399",
   "university": "دانشگاه علوم تحقیقات",
-  "totalUnitsRequired": 140,
+  "totalUnitsRequired": 139,
   "groups": [
     {
       "id": "general",
@@ -10,15 +10,15 @@
       "requiredUnits": 26,
       "courses": [
         {
-          "id": "gen-1",
-          "title": "فارسی عمومی",
+          "id": "فارسی",
+          "title": "فارسی",
           "units": 3,
           "prerequisites": [],
           "corequisites": []
         },
         {
-          "id": "gen-2",
-          "title": "زبان انگلیسی عمومی",
+          "id": "زبان انگلیسی",
+          "title": "زبان انگلیسی",
           "units": 3,
           "prerequisites": [],
           "corequisites": []
@@ -35,13 +35,6 @@
           "title": "اندیشه اسلامی ۲",
           "units": 2,
           "prerequisites": ["gen-3"],
-          "corequisites": []
-        },
-        {
-          "id": "gen-5",
-          "title": "آیین زندگی",
-          "units": 2,
-          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -63,20 +56,6 @@
           "title": "تاریخ تحلیلی صدر اسلام",
           "units": 2,
           "prerequisites": [],
-          "corequisites": []
-        },
-        {
-          "id": "gen-9",
-          "title": "تربیت بدنی ۱",
-          "units": 1,
-          "prerequisites": [],
-          "corequisites": []
-        },
-        {
-          "id": "gen-10",
-          "title": "تربیت بدنی ۲",
-          "units": 1,
-          "prerequisites": ["gen-9"],
           "corequisites": []
         },
         {
@@ -105,6 +84,20 @@
           "title": "دفاع مقدس",
           "units": 2,
           "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "تربیت بدنی 1",
+          "title": "تربیت بدنی 1",
+          "units": 1,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "تربیت بدنی 2",
+          "title": "تربیت بدنی 2",
+          "units": 3,
+          "prerequisites": ["تربیت بدنی 1"],
           "corequisites": []
         }
       ]
@@ -150,8 +143,8 @@
           "corequisites": []
         },
         {
-          "id": "linear-alg-basic",
-          "title": "مبانی ماتریس و جبر خطی",
+          "id": "جبرخطی",
+          "title": "جبرخطی",
           "units": 3,
           "prerequisites": [],
           "corequisites": []
@@ -185,22 +178,22 @@
           "corequisites": []
         },
         {
-          "id": "linear-alg",
-          "title": "ماتریس و جبر خطی",
+          "id": "مبانی ماتریس و جبر خطی",
+          "title": "مبانی ماتریس و جبر خطی",
           "units": 3,
           "prerequisites": ["math-foundations"],
           "corequisites": []
         },
         {
-          "id": "math-analysis",
-          "title": "آنالیز ریاضی",
+          "id": "مبانی آنالیز ریاضی",
+          "title": "مبانی آنالیز ریاضی",
           "units": 3,
           "prerequisites": ["math-2"],
           "corequisites": []
         },
         {
-          "id": "num-analysis",
-          "title": "آنالیز عددی",
+          "id": "مبانی آنالیز عددی",
+          "title": "مبانی آنالیز عددی",
           "units": 3,
           "prerequisites": ["math-2"],
           "corequisites": []
@@ -220,59 +213,66 @@
       "requiredUnits": 30,
       "courses": [
         {
-          "id": "logic-basics",
-          "title": "مبانی منطق",
+          "id": "مبانی جبر",
+          "title": "مبانی جبر",
           "units": 3,
           "prerequisites": ["math-foundations"],
           "corequisites": []
         },
         {
-          "id": "combinatorics",
+          "id": "مبانی ترکیبیات",
           "title": "مبانی ترکیبیات",
           "units": 3,
           "prerequisites": ["math-foundations"],
           "corequisites": []
         },
         {
-          "id": "theory-comp",
-          "title": "مبانی نظریه محاسبه",
+          "id": "مبانی منطق و نظریه مجموعه ها",
+          "title": "مبانی منطق و نظریه مجموعه ها",
           "units": 3,
           "prerequisites": ["math-foundations"],
           "corequisites": []
         },
         {
-          "id": "adv-prog",
-          "title": "برنامه‌سازی پیشرفته",
-          "units": 4,
+          "id": "مبانی نظری محاسبه",
+          "title": "مبانی نظری محاسبه",
+          "units": 3,
+          "prerequisites": ["math-foundations"],
+          "corequisites": []
+        },
+        {
+          "id": "برنامه سازی پیشرفته",
+          "title": "برنامه سازی پیشرفته",
+          "units": 3,
           "prerequisites": ["cs-basics"],
           "corequisites": []
         },
         {
-          "id": "ds",
-          "title": "ساختمان داده‌ها و الگوریتم‌ها",
+          "id": "ساختمان داده ها و الگوریتم ها",
+          "title": "ساختمان داده ها و الگوریتم ها",
           "units": 4,
-          "prerequisites": ["adv-prog"],
+          "prerequisites": ["برنامه سازی پیشرفته"],
           "corequisites": []
         },
         {
-          "id": "os",
-          "title": "اصول سیستم‌های عامل",
-          "units": 3,
-          "prerequisites": ["ds"],
-          "corequisites": []
-        },
-        {
-          "id": "num-linear-alg",
-          "title": "جبر خطی عددی",
-          "units": 3,
-          "prerequisites": ["num-analysis"],
-          "corequisites": []
-        },
-        {
-          "id": "sys-principles",
-          "title": "اصول سیستم‌های کامپیوتری",
+          "id": "اصول سیستم های عامل",
+          "title": "اصول سیستم های عامل",
           "units": 4,
-          "prerequisites": ["adv-prog"],
+          "prerequisites": ["ساختمان داده ها و الگوریتم ها"],
+          "corequisites": []
+        },
+        {
+          "id": "جبرخطی عددی",
+          "title": "جبرخطی عددی",
+          "units": 3,
+          "prerequisites": ["مبانی آنالیز عددی"],
+          "corequisites": []
+        },
+        {
+          "id": "اصول سیستم های کامپیوتری",
+          "title": "اصول سیستم های کامپیوتری",
+          "units": 4,
+          "prerequisites": ["برنامه سازی پیشرفته"],
           "corequisites": []
         }
       ]
@@ -287,54 +287,54 @@
           "id": "linear-opt",
           "title": "بهینه‌سازی خطی",
           "units": 3,
-          "prerequisites": ["linear-alg"],
+          "prerequisites": ["مبانی ماتریس و جبر خطی"],
           "corequisites": []
         },
         {
-          "id": "num-analysis-2",
-          "title": "آنالیز عددی ۲",
+          "id": "آنالیز عددی",
+          "title": "آنالیز عددی",
           "units": 3,
-          "prerequisites": ["num-analysis"],
+          "prerequisites": ["مبانی آنالیز عددی"],
           "corequisites": []
         },
         {
           "id": "nonlinear-opt",
           "title": "بهینه‌سازی غیرخطی",
           "units": 3,
-          "prerequisites": ["num-analysis"],
+          "prerequisites": ["مبانی آنالیز عددی"],
           "corequisites": []
         },
         {
           "id": "algo-design",
           "title": "طراحی و تحلیل الگوریتم‌ها",
           "units": 3,
-          "prerequisites": ["theory-comp", "combinatorics"],
+          "prerequisites": ["مبانی نظری محاسبه", "مبانی ترکیبیات"],
           "corequisites": []
         },
         {
           "id": "theory-comp-adv",
           "title": "نظریه محاسبه",
           "units": 3,
-          "prerequisites": ["theory-comp"],
+          "prerequisites": ["مبانی نظری محاسبه"],
           "corequisites": []
         },
         {
           "id": "compiler",
           "title": "کامپایلر",
           "units": 3,
-          "prerequisites": ["theory-comp"],
+          "prerequisites": ["مبانی نظری محاسبه"],
           "corequisites": []
         },
         {
           "id": "db",
           "title": "پایگاه داده",
           "units": 3,
-          "prerequisites": ["ds"],
+          "prerequisites": ["ساختمان داده ها و الگوریتم ها"],
           "corequisites": []
         },
         {
-          "id": "topics",
-          "title": "مباحث در علوم کامپیوتر",
+          "id": "مباحثی در علوم کامپیوتر",
+          "title": "مباحثی در علوم کامپیوتر",
           "units": 3,
           "prerequisites": [],
           "description": "با اجازه گروه",
@@ -351,42 +351,42 @@
           "id": "comp-geometry",
           "title": "طراحی هندسی کامپیوتری",
           "units": 3,
-          "prerequisites": ["num-linear-alg", "adv-prog"],
+          "prerequisites": ["جبرخطی عددی", "برنامه سازی پیشرفته"],
           "corequisites": []
         },
         {
           "id": "networks",
           "title": "شبکه‌های کامپیوتری",
           "units": 3,
-          "prerequisites": ["sys-principles"],
+          "prerequisites": ["اصول سیستم های کامپیوتری"],
           "corequisites": []
         },
         {
           "id": "graphics",
           "title": "گرافیک کامپیوتری",
           "units": 3,
-          "prerequisites": ["ds"],
+          "prerequisites": ["ساختمان داده ها و الگوریتم ها"],
           "corequisites": []
         },
         {
           "id": "ai",
           "title": "هوش مصنوعی",
           "units": 3,
-          "prerequisites": ["ds", "prob"],
+          "prerequisites": ["prob", "ساختمان داده ها و الگوریتم ها"],
           "corequisites": []
         },
         {
           "id": "sw-design",
           "title": "اصول طراحی نرم‌افزار",
           "units": 3,
-          "prerequisites": ["ds"],
+          "prerequisites": ["ساختمان داده ها و الگوریتم ها"],
           "corequisites": []
         },
         {
           "id": "micro-1",
           "title": "ریزپردازنده ۱",
           "units": 3,
-          "prerequisites": ["sys-principles"],
+          "prerequisites": ["اصول سیستم های کامپیوتری"],
           "corequisites": []
         },
         {
@@ -401,35 +401,35 @@
           "id": "logic",
           "title": "منطق",
           "units": 3,
-          "prerequisites": ["logic-basics"],
+          "prerequisites": ["مبانی منطق و نظریه مجموعه ها"],
           "corequisites": []
         },
         {
           "id": "logic-circuits",
           "title": "مدار منطقی",
           "units": 3,
-          "prerequisites": ["combinatorics"],
+          "prerequisites": ["مبانی ترکیبیات"],
           "corequisites": []
         },
         {
           "id": "coding-theory",
           "title": "نظریه کدگذاری",
           "units": 3,
-          "prerequisites": ["combinatorics"],
+          "prerequisites": [],
           "corequisites": []
         },
         {
           "id": "comb-opt",
           "title": "بهینه‌سازی ترکیبیاتی",
           "units": 3,
-          "prerequisites": ["linear-opt", "combinatorics"],
+          "prerequisites": ["linear-opt", "مبانی ترکیبیات"],
           "corequisites": []
         },
         {
-          "id": "math-sw",
-          "title": "نرم‌افزار ریاضی",
+          "id": "نرم‌ افزار ریاضی",
+          "title": "نرم‌ افزار ریاضی",
           "units": 3,
-          "prerequisites": ["num-analysis"],
+          "prerequisites": ["مبانی آنالیز عددی"],
           "corequisites": []
         },
         {
@@ -443,14 +443,14 @@
           "id": "prog-langs",
           "title": "زبان‌های برنامه‌سازی",
           "units": 3,
-          "prerequisites": ["ds"],
+          "prerequisites": [],
           "corequisites": []
         },
         {
           "id": "simulation",
           "title": "شبیه‌سازی کامپیوتری",
           "units": 3,
-          "prerequisites": ["ds", "prob"],
+          "prerequisites": ["prob"],
           "corequisites": []
         }
       ]

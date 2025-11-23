@@ -139,7 +139,13 @@ export const Builder: React.FC = () => {
       ...localTemplate,
       groups: localTemplate.groups.map((g) => ({
         ...g,
-        courses: g.courses.filter((c) => c.id !== courseId),
+        courses: g.courses
+          .filter((c) => c.id !== courseId)
+          .map((c) => ({
+            ...c,
+            prerequisites: c.prerequisites.filter((p) => p !== courseId),
+            corequisites: c.corequisites.filter((co) => co !== courseId),
+          })),
       })),
     });
   };
