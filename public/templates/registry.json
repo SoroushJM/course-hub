@@ -3,5 +3,10 @@
     "id": "cs-1402",
     "title": "علوم کامپیوتر - ورودی ۱۴۰۲",
     "file": "/templates/cs-default.json"
+  },
+    {
+    "id": "cs-1401",
+    "title": "علوم کامپیوتر - ورودی ۱۴۰۱",
+    "file": "/templates/cs-401.json"
   }
 ]
