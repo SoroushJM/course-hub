@@ -31,15 +31,16 @@ export const TemplateManager: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  // Hardcoded official templates for now (could be fetched from registry.json in future)
-  const officialTemplates = [
-    {
-      id: "cs-1402",
-      title: "علوم کامپیوتر - ورودی ۱۴۰۲",
-      university: "دانشگاه علوم تحقیقات",
-    },
-    // Add more here if needed
-  ];
+  const [officialTemplates, setOfficialTemplates] = useState<
+    { id: string; title: string; university?: string }[]
+  >([]);
+
+  React.useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}templates/registry.json`)
+      .then((res) => res.json())
+      .then((data) => setOfficialTemplates(data))
+      .catch((err) => console.error("Failed to load registry", err));
+  }, []);
 
   const handleLoad = async (id: string) => {
     await loadTemplate(id);

@@ -1,0 +1,491 @@
+{
+  "id": "cs-1401",
+  "title": "علوم کامپیوتر - ورودی 1401",
+  "university": "دانشگاه علوم تحقیقات",
+  "totalUnitsRequired": 139,
+  "groups": [
+    {
+      "id": "general",
+      "title": "دروس عمومی",
+      "requiredUnits": 26,
+      "courses": [
+        {
+          "id": "gen-1",
+          "title": "زبان فارسی",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "gen-2-1",
+          "title": "زبان انگلیسی ترکیبی 1",
+          "units": 1,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "gen-2-2",
+          "title": "زبان انگلیسی ترکیبی 2",
+          "units": 1,
+          "prerequisites": ["gen-2-2"],
+          "corequisites": []
+        },
+        {
+          "id": "gen-2-3",
+          "title": "زبان انگلیسی ترکیبی 3",
+          "units": 1,
+          "prerequisites": ["gen-2-3"],
+          "corequisites": []
+        },
+        {
+          "id": "gen-3",
+          "title": "تربیت بدنی 1",
+          "units": 1,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "gen-4",
+          "title": "ورزش",
+          "units": 1,
+          "prerequisites": ["gen-3"],
+          "corequisites": []
+        },
+        {
+          "id": "gen-5",
+          "title": "معارف *",
+          "units": 18,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "id": "basic-required",
+      "title": "دروس الزامی پایه",
+      "requiredUnits": 18,
+      "courses": [
+        {
+          "id": "bas-1",
+          "title": "ریاضی عمومی ۱",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-2",
+          "title": "ریاضی عمومی ۲",
+          "units": 3,
+          "prerequisites": ["bas-1"],
+          "corequisites": []
+        },
+        {
+          "id": "bas-3",
+          "title": "معادلات دیفرانسیل",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": ["bas-2"]
+        },
+        {
+          "id": "bas-4",
+          "title": "مبانی کامپیوتر و برنامه‌سازی",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-5",
+          "title": "فیزیک عمومی ۱",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-6",
+          "title": "روش تحقیق و گزارش نویسی",
+          "units": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-7",
+          "title": "کارگاه کامپیوتر",
+          "units": 1,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "id": "basic-optional",
+      "title": "دروس انتخابی پایه",
+      "requiredUnits": 3,
+      "courses": [
+        {
+          "id": "bas-o-1",
+          "title": "مبانی اقتصاد",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-o-2",
+          "title": "فیزیک عمومی ۲",
+          "units": 3,
+          "prerequisites": ["bas-5"],
+          "corequisites": []
+        },
+        {
+          "id": "bas-o-3",
+          "title": "اصول حسابداری و هزینه یابی",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "bas-o-4",
+          "title": "اصول مدیریت",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "id": "specialized-required",
+      "title": "دروس الزامی تخصصی",
+      "requiredUnits": 57,
+      "courses": [
+        {
+          "id": "sp-1",
+          "title": "مبانی علوم ریاضی",
+          "units": 3,
+          "prerequisites": ["bas-1"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-2",
+          "title": "مبانی ماتریس ها و جبر خطی",
+          "units": 3,
+          "prerequisites": ["sp-1"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-3",
+          "title": "مبانی ترکیبیات",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": ["sp-1"]
+        },
+        {
+          "id": "sp-4",
+          "title": "مبانی آنالیز عددی",
+          "units": 3,
+          "prerequisites": ["bas-2"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-5",
+          "title": "مبانی احتمال",
+          "units": 3,
+          "prerequisites": ["bas-1"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-6",
+          "title": "مبانی نظریه محاسبه",
+          "units": 3,
+          "prerequisites": ["sp-1"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-7",
+          "title": "برنامه سازی پیشرفته",
+          "units": 4,
+          "prerequisites": ["bas-4"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-8",
+          "title": "ساختمان داده ها و الگوریتم ها",
+          "units": 4,
+          "prerequisites": ["sp-7"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-9",
+          "title": "اصول سیستم های عامل",
+          "units": 4,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-10",
+          "title": "جبر خطی عددی",
+          "units": 3,
+          "prerequisites": ["sp-2"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-11",
+          "title": "اصول سیستم های کامپیوتری",
+          "units": 4,
+          "prerequisites": ["sp-7"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-12",
+          "title": "مبانی منطق و نظریه مجموعه ها",
+          "units": 3,
+          "prerequisites": ["sp-1"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-13",
+          "title": "طراحی و تحلیل الگوریتم ها",
+          "units": 3,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-14",
+          "title": "بهینه سازی خطی",
+          "units": 3,
+          "prerequisites": ["sp-2"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-15",
+          "title": "نظریه محاسبه",
+          "units": 3,
+          "prerequisites": ["sp-6"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-16",
+          "title": "هوش مصنوعی",
+          "units": 4,
+          "prerequisites": ["sp-8", "sp-5"],
+          "corequisites": []
+        },
+        {
+          "id": "sp-17",
+          "title": "اصول طراحی نرم افزار",
+          "units": 4,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "id": "specialized-elective",
+      "title": "دروس تخصصی انتخابی",
+      "requiredUnits": 6,
+      "courses": [
+        {
+          "id": "sel-1",
+          "title": "کامپایلر",
+          "units": 3,
+          "prerequisites": ["sp-6"],
+          "corequisites": []
+        },
+        {
+          "id": "sel-2",
+          "title": "پایگاه داده ها",
+          "units": 4,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "sel-3",
+          "title": "شبکه های کامپیوتری",
+          "units": 3,
+          "prerequisites": ["sp-11"],
+          "corequisites": []
+        },
+        {
+          "id": "sel-4",
+          "title": "مباحثی در علوم کامپیوتر",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "sel-5",
+          "title": "بهینه سازی غیر خطی",
+          "units": 3,
+          "prerequisites": ["sp-14"],
+          "corequisites": []
+        },
+        {
+          "id": "sel-6",
+          "title": "نظریه گراف و کاربرد ها",
+          "units": 3,
+          "prerequisites": ["sp-3"],
+          "corequisites": []
+        },
+        {
+          "id": "sel-7",
+          "title": "آنالیز عددی",
+          "units": 3,
+          "prerequisites": ["sp-4"],
+          "corequisites": []
+        }
+      ]
+    },
+    {
+      "id": "elective-courses",
+      "title": "لیست دروس اختیاری",
+      "requiredUnits": 30,
+      "courses": [
+        {
+          "id": "elect-1",
+          "title": "طراحی هندسی کامپیوتری",
+          "units": 3,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-2",
+          "title": "شبیه سازی کامپیوتری",
+          "units": 3,
+          "prerequisites": ["sp-5"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-3",
+          "title": "مقدمه ای بر داده کاوی",
+          "units": 3,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "elect-4",
+          "title": "پروژه",
+          "units": 3,
+          "prerequisites": ["bas-6"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-5",
+          "title": "کارآموزی ۱",
+          "units": 2,
+          "prerequisites": ["bas-6"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-6",
+          "title": "کارآموزی ۲",
+          "units": 2,
+          "prerequisites": ["elect-5"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-7",
+          "title": "کاربرد کامپیوتر در سیستم های تجاری",
+          "units": 3,
+          "prerequisites": ["sp-7"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-8",
+          "title": "بهینه سازی ترکیبیاتی و آنالیز شبکه ها",
+          "units": 3,
+          "prerequisites": ["sp-14"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-9",
+          "title": "مبانی آنالیز ریاضی",
+          "units": 3,
+          "prerequisites": ["bas-1","sp-1"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-10",
+          "title": "مبانی جبر",
+          "units": 3,
+          "prerequisites": ["sp-2"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-11",
+          "title": "نظریه کدگذاری",
+          "units": 3,
+          "prerequisites": ["elect-10", "sp-2"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-12",
+          "title": "زبان های برنامه سازی",
+          "units": 3,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-13",
+          "title": "گرافیک کامپیوتری",
+          "units": 3,
+          "prerequisites": ["sp-8"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-14",
+          "title": "منطق",
+          "units": 3,
+          "prerequisites": ["sp-3","sp-12"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-15",
+          "title": "سیستم های اطلاعاتی مدیریت",
+          "units": 3,
+          "prerequisites": ["bas-o-4"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-16",
+          "title": "ریاضیات مهندسی",
+          "units": 3,
+          "prerequisites": ["bas-2"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-17",
+          "title": "احتمال ۱",
+          "units": 3,
+          "prerequisites": ["sp-5"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-18",
+          "title": "زیست‌ شناسی سلولی و مولکولی",
+          "units": 2,
+          "prerequisites": [],
+          "corequisites": []
+        },
+        {
+          "id": "elect-19",
+          "title": "مباحثی در الگوریتم ها",
+          "units": 3,
+          "prerequisites": ["sp-13"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-20",
+          "title": "مبانی بیوانفورماتیک",
+          "units": 4,
+          "prerequisites": ["elect-18"],
+          "corequisites": []
+        },
+        {
+          "id": "elect-21",
+          "title": "مبانی کارآفرینی",
+          "units": 2,
+          "prerequisites": [],
+          "corequisites": []
+        }
+      ]
+    }
+  ]
+}
