@@ -26,9 +26,10 @@ The application allows users to:
 ### 3.1. File Storage Strategy (GitHub Pages)
 Since there is no backend, the application loads "Official Templates" from the static public directory.
 *   **Directory Structure:**
-    *   `/public/templates/registry.json`: A list of available majors (e.g., "Computer Science - 1402").
-    *   `/public/templates/cs-default.json`: The actual template file containing course data.
-*   **Community Contribution:** To add a new major, a developer creates a JSON file and submits a Pull Request (PR) to the GitHub repository adding the file and updating the registry.
+    *   `/public/templates/registry.json`: The master list of available majors.
+        *   Each entry contains: `id`, `title`, and `file` (relative path to the JSON file).
+    *   `/public/templates/*.json`: The actual template files (e.g., `cs-399.json`, `cs-401.json`).
+*   **Community Contribution:** To add a new major, a developer creates a JSON file and submits a Pull Request (PR) to the GitHub repository adding the file and updating the `registry.json`.
 
 ### 3.2. Data Models (TypeScript Interfaces)
 

@@ -1,12 +1,12 @@
 [
   {
     "id": "cs-1402",
-    "title": "علوم کامپیوتر - ورودی ۱۴۰۲",
-    "file": "/templates/cs-default.json"
+    "title": "علوم کامپیوتر - ورودی 1399",
+    "file": "/templates/cs-399.json"
   },
     {
     "id": "cs-1401",
-    "title": "علوم کامپیوتر - ورودی ۱۴۰۱",
+    "title": "علوم کامپیوتر - ورودی 1401",
     "file": "/templates/cs-401.json"
   }
 ]
