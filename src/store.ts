@@ -55,11 +55,36 @@ const curriculumStore: StateCreator<
         return;
       }
 
-      // 2. Fetch Official Template
+      // 2. Fetch Official Template via Registry
+      let templateFile = `${templateId}.json`;
+
+      try {
+        const registryRes = await fetch(
+          `${import.meta.env.BASE_URL}templates/registry.json`
+        );
+        if (registryRes.ok) {
+          const registry = await registryRes.json();
+          const entry = registry.find((r: any) => r.id === templateId);
+          if (entry && entry.file) {
+            // Remove leading slash if exists to avoid double slash issues with BASE_URL if needed,
+            // but usually BASE_URL + file works if file is relative.
+            // registry.json has "/templates/..." which is relative to public.
+            // We should strip the leading slash if we append to BASE_URL which might not be empty.
+            // Actually, simplest is to use the file path directly relative to public root (BASE_URL).
+            templateFile = entry.file.startsWith("/")
+              ? entry.file.slice(1)
+              : entry.file;
+          }
+        }
+      } catch (e) {
+        console.warn(
+          "Could not load registry, falling back to ID-based lookup",
+          e
+        );
+      }
+
       const response = await fetch(
-        `${import.meta.env.BASE_URL}templates/${
-          templateId === "cs-1402" ? "cs-default" : templateId
-        }.json`
+        `${import.meta.env.BASE_URL}${templateFile}`
       );
       if (!response.ok) throw new Error("Template not found");
 
